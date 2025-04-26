@@ -1,16 +1,16 @@
 {
-	"name": "@stonkerino/db",
-	"version": "0.0.0",
-	"module": "index.ts",
-	"type": "module",
-	"scripts": {
-		"test": "bun test",
-		"check-types": "bun --bun tsc --noEmit"
-	},
-	"devDependencies": {
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
-	}
+  "name": "@stonkerino/db",
+  "version": "0.0.0",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "check-types": "bun --bun tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
 }

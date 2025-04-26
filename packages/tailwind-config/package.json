@@ -1,12 +1,13 @@
 {
-	"name": "@stonkerino/tailwind-config",
-	"version": "0.0.0",
-	"private": true,
-	"exports": {
-		".": "./tailwind.config.ts"
-	},
-	"devDependencies": {
-		"@stonkerino/typescript-config": "*",
-		"tailwindcss": "^3.4.17"
-	}
+  "name": "@stonkerino/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.ts"
+  },
+  "devDependencies": {
+    "@stonkerino/typescript-config": "*",
+    "@tailwindcss/postcss": "^4.1.4",
+    "tailwindcss": "^4"
+  }
 }
