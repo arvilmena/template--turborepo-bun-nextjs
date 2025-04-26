@@ -1,28 +1,25 @@
 {
-  "name": "with-tailwind",
-  "private": true,
-  "scripts": {
-    "build": "bun --bun turbo run build",
-    "dev": "bun --bun turbo run dev",
-    "lint": "bun --bun turbo run lint",
-    "test": "bun --bun turbo run test",
-    "check-types": "bun --bun turbo run check-types",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "format-and-lint": "biome check .",
-    "format-and-lint:fix": "biome check . --write"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "turbo": "^2.5.2"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.2.10",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+	"name": "with-tailwind",
+	"private": true,
+	"scripts": {
+		"build": "bun --bun turbo run build",
+		"dev": "bun --bun turbo run dev",
+		"lint": "bun --bun turbo run lint",
+		"test": "bun --bun turbo run test",
+		"check-types": "bun --bun turbo run check-types",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"format-and-lint": "biome check .",
+		"format-and-lint:fix": "biome check . --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"prettier": "^3.5.3",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"turbo": "^2.5.2"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "bun@1.2.10",
+	"workspaces": ["apps/*", "packages/*"]
 }

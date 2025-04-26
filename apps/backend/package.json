@@ -1,16 +1,16 @@
 {
-  "name": "backend",
-  "version": "1.0.50",
-  "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "check-types": "bun --bun tsc --noEmit",
-    "dev": "bun run --watch src/index.ts"
-  },
-  "dependencies": {
-    "elysia": "latest"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+	"name": "backend",
+	"version": "1.0.50",
+	"scripts": {
+		"test": "echo \"Error: no test specified\"",
+		"check-types": "bun --bun tsc --noEmit",
+		"dev": "bun run --watch src/index.ts"
+	},
+	"dependencies": {
+		"elysia": "latest"
+	},
+	"devDependencies": {
+		"bun-types": "latest"
+	},
+	"module": "src/index.js"
 }

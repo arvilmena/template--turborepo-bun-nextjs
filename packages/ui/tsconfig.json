@@ -1,5 +1,5 @@
 {
-  "extends": "@stonkerino/typescript-config/react-library.json",
-  "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"]
+	"extends": "@stonkerino/typescript-config/react-library.json",
+	"include": ["src"],
+	"exclude": ["dist", "build", "node_modules"]
 }
