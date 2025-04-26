@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@stonkerino/ui",
   "version": "0.0.0",
   "sideEffects": [
     "**/*.css"
@@ -22,9 +22,9 @@
     "react": "^19"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/tailwind-config": "*",
-    "@repo/typescript-config": "*",
+    "@stonkerino/eslint-config": "*",
+    "@stonkerino/tailwind-config": "*",
+    "@stonkerino/typescript-config": "*",
     "@types/react": "^19.1.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.25.0",
