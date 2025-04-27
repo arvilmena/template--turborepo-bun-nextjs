@@ -1,7 +1,6 @@
 import { Button } from "@my/ui/shadcn/button";
 
 export default function Page() {
-  const result = JSON.parse("{}");
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-24">
       <h1 className="text-center text-2xl font-bold border border-blue-700 p-10">
