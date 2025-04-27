@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  transpilePackages: ["@stonkerino/ui"],
+  transpilePackages: ["@my/ui"],
 };
 
 export default nextConfig;

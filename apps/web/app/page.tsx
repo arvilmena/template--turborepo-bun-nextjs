@@ -1,4 +1,4 @@
-import { Button } from "@stonkerino/ui/shadcn/button";
+import { Button } from "@my/ui/shadcn/button";
 
 export default function Page() {
   return (
@@ -13,8 +13,9 @@ export default function Page() {
 
       <Button variant="destructive">Click me</Button>
 
-      <p className="prose">
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+        kek test
       </p>
     </main>
   );

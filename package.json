@@ -1,5 +1,5 @@
 {
-  "name": "stonkerino",
+  "name": "arvils-project",
   "private": true,
   "scripts": {
     "check-types": "bun --bun turbo run check-types",

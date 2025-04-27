@@ -25,16 +25,16 @@
       "name": "docs",
       "version": "1.0.0",
       "dependencies": {
-        "@stonkerino/ui": "*",
+        "@my/ui": "*",
         "next": "^15.3.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
       "devDependencies": {
+        "@my/eslint-config": "*",
+        "@my/tailwind-config": "*",
+        "@my/typescript-config": "*",
         "@next/eslint-plugin-next": "^15.3.0",
-        "@stonkerino/eslint-config": "*",
-        "@stonkerino/tailwind-config": "*",
-        "@stonkerino/typescript-config": "*",
         "@tailwindcss/postcss": "^4.1.4",
         "@types/node": "^22.14.0",
         "@types/react": "^19.1.0",
@@ -50,16 +50,16 @@
       "name": "web",
       "version": "1.0.0",
       "dependencies": {
-        "@stonkerino/ui": "*",
+        "@my/ui": "*",
         "next": "^15.3.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
       },
       "devDependencies": {
+        "@my/eslint-config": "*",
+        "@my/tailwind-config": "*",
+        "@my/typescript-config": "*",
         "@next/eslint-plugin-next": "^15.3.0",
-        "@stonkerino/eslint-config": "*",
-        "@stonkerino/tailwind-config": "*",
-        "@stonkerino/typescript-config": "*",
         "@tailwindcss/postcss": "^4.1.4",
         "@types/node": "^22.14.0",
         "@types/react": "^19.1.0",
@@ -72,7 +72,7 @@
       },
     },
     "packages/db": {
-      "name": "@stonkerino/db",
+      "name": "@my/db",
       "version": "0.0.0",
       "devDependencies": {
         "@types/bun": "latest",
@@ -82,7 +82,7 @@
       },
     },
     "packages/eslint-config": {
-      "name": "@stonkerino/eslint-config",
+      "name": "@my/eslint-config",
       "version": "0.0.0",
       "devDependencies": {
         "@eslint/js": "^9.25.0",
@@ -99,25 +99,25 @@
       },
     },
     "packages/tailwind-config": {
-      "name": "@stonkerino/tailwind-config",
+      "name": "@my/tailwind-config",
       "version": "0.0.0",
       "devDependencies": {
-        "@stonkerino/typescript-config": "*",
+        "@my/typescript-config": "*",
         "@tailwindcss/postcss": "^4.1.4",
         "tailwindcss": "^4",
       },
     },
     "packages/typescript-config": {
-      "name": "@stonkerino/typescript-config",
+      "name": "@my/typescript-config",
       "version": "0.0.0",
     },
     "packages/ui": {
-      "name": "@stonkerino/ui",
+      "name": "@my/ui",
       "version": "0.0.0",
       "devDependencies": {
-        "@stonkerino/eslint-config": "*",
-        "@stonkerino/tailwind-config": "*",
-        "@stonkerino/typescript-config": "*",
+        "@my/eslint-config": "*",
+        "@my/tailwind-config": "*",
+        "@my/typescript-config": "*",
         "@tailwindcss/cli": "^4.1.4",
         "@tailwindcss/postcss": "^4.1.4",
         "@tailwindcss/typography": "^0.5.16",
@@ -126,7 +126,6 @@
         "eslint": "^9.25.0",
         "postcss": "^8.5.3",
         "tailwindcss": "^4.1.4",
-        "tailwindcss-animate": "^1.0.7",
         "typescript": "5.8.2",
       },
       "peerDependencies": {
@@ -223,6 +222,16 @@
 
     "@img/sharp-win32-x64": ["@img/sharp-win32-x64@0.34.1", "", { "os": "win32", "cpu": "x64" }, "sha512-hw1iIAHpNE8q3uMIRCgGOeDoz9KtFNarFLQclLxr/LK1VBkj8nby18RjFvr6aP7USRYAjTZW6yisnBWMX571Tw=="],
 
+    "@my/db": ["@my/db@workspace:packages/db"],
+
+    "@my/eslint-config": ["@my/eslint-config@workspace:packages/eslint-config"],
+
+    "@my/tailwind-config": ["@my/tailwind-config@workspace:packages/tailwind-config"],
+
+    "@my/typescript-config": ["@my/typescript-config@workspace:packages/typescript-config"],
+
+    "@my/ui": ["@my/ui@workspace:packages/ui"],
+
     "@next/env": ["@next/env@15.3.1", "", {}, "sha512-cwK27QdzrMblHSn9DZRV+DQscHXRuJv6MydlJRpFSqJWZrTYMLzKDeyueJNN9MGd8NNiUKzDQADAf+dMLXX7YQ=="],
 
     "@next/eslint-plugin-next": ["@next/eslint-plugin-next@15.3.1", "", { "dependencies": { "fast-glob": "3.3.1" } }, "sha512-oEs4dsfM6iyER3jTzMm4kDSbrQJq8wZw5fmT6fg2V3SMo+kgG+cShzLfEV20senZzv8VF+puNLheiGPlBGsv2A=="],
@@ -278,16 +287,6 @@
     "@parcel/watcher-win32-x64": ["@parcel/watcher-win32-x64@2.5.1", "", { "os": "win32", "cpu": "x64" }, "sha512-9lHBdJITeNR++EvSQVUcaZoWupyHfXe1jZvGZ06O/5MflPcuPLtEphScIBL+AiCWBO46tDSHzWyD0uDmmZqsgA=="],
 
     "@sinclair/typebox": ["@sinclair/typebox@0.34.33", "", {}, "sha512-5HAV9exOMcXRUxo+9iYB5n09XxzCXnfy4VTNW4xnDv+FgjzAGY989C28BIdljKqmF+ZltUwujE3aossvcVtq6g=="],
-
-    "@stonkerino/db": ["@stonkerino/db@workspace:packages/db"],
-
-    "@stonkerino/eslint-config": ["@stonkerino/eslint-config@workspace:packages/eslint-config"],
-
-    "@stonkerino/tailwind-config": ["@stonkerino/tailwind-config@workspace:packages/tailwind-config"],
-
-    "@stonkerino/typescript-config": ["@stonkerino/typescript-config@workspace:packages/typescript-config"],
-
-    "@stonkerino/ui": ["@stonkerino/ui@workspace:packages/ui"],
 
     "@swc/counter": ["@swc/counter@0.1.3", "", {}, "sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ=="],
 
@@ -841,8 +840,6 @@
 
     "tailwindcss": ["tailwindcss@4.1.4", "", {}, "sha512-1ZIUqtPITFbv/DxRmDr5/agPqJwF69d24m9qmM1939TJehgY539CtzeZRjbLt5G6fSy/7YqqYsfvoTEw9xUI2A=="],
 
-    "tailwindcss-animate": ["tailwindcss-animate@1.0.7", "", { "peerDependencies": { "tailwindcss": ">=3.0.0 || insiders" } }, "sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA=="],
-
     "tapable": ["tapable@2.2.1", "", {}, "sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ=="],
 
     "to-regex-range": ["to-regex-range@5.0.1", "", { "dependencies": { "is-number": "^7.0.0" } }, "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="],
@@ -911,7 +908,7 @@
 
     "@humanfs/node/@humanwhocodes/retry": ["@humanwhocodes/retry@0.3.1", "", {}, "sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA=="],
 
-    "@stonkerino/ui/typescript": ["typescript@5.8.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="],
+    "@my/ui/typescript": ["typescript@5.8.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="],
 
     "@tailwindcss/oxide-wasm32-wasi/@emnapi/core": ["@emnapi/core@1.4.3", "", { "dependencies": { "@emnapi/wasi-threads": "1.0.2", "tslib": "^2.4.0" }, "bundled": true }, "sha512-4m62DuCE07lw01soJwPiBGC0nAww0Q+RY70VZ+n49yDIO13yyinhbWCeNnaob0lakDtWQzSdtNWzJeOJt2ma+g=="],
 

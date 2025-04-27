@@ -1,5 +1,5 @@
 {
-  "name": "@stonkerino/db",
+  "name": "@my/db",
   "version": "0.0.0",
   "module": "index.ts",
   "type": "module",

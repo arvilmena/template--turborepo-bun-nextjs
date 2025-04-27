@@ -1,5 +1,5 @@
 {
-  "extends": "@stonkerino/typescript-config/base.json",
+  "extends": "@my/typescript-config/base.json",
   "compilerOptions": {
     // Environment setup & latest features
     "lib": ["ESNext"],

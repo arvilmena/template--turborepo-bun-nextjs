@@ -11,16 +11,16 @@
     "check-types": "bun --bun tsc --noEmit"
   },
   "dependencies": {
-    "@stonkerino/ui": "*",
+    "@my/ui": "*",
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.3.0",
-    "@stonkerino/eslint-config": "*",
-    "@stonkerino/tailwind-config": "*",
-    "@stonkerino/typescript-config": "*",
+    "@my/eslint-config": "*",
+    "@my/tailwind-config": "*",
+    "@my/typescript-config": "*",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",
