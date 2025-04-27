@@ -5,7 +5,7 @@
     "test": "echo \"Error: no test specified\"",
     "check-types": "bun --bun tsc --noEmit",
     "dev": "bun --bun --env-file=./../../.env --watch src/index.ts",
-    "build": "bun --bun --env-file=./../../.env build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/index.ts"
+    "build": "bun --bun --env-file=./../../.env build --compile --minify-whitespace --minify-syntax --target bun --outfile server.elysia ./src/index.ts"
   },
   "dependencies": {
     "elysia": "latest"

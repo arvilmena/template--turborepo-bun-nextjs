@@ -39,4 +39,4 @@ package-lock.json
 **/*.bun
 
 # build output
-server
+server.elysia

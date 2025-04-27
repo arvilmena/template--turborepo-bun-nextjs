@@ -9,7 +9,8 @@
     "test": "bun --bun turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint:fix": "biome check . --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:push": "bunx dotenvx run -f .env -- bun --bun ./node_modules/drizzle-kit/bin.cjs --config ./packages/db/drizzle.config.ts push"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -22,5 +23,8 @@
     "node": ">=18"
   },
   "packageManager": "bun@1.2.10",
-  "workspaces": ["apps/*", "packages/*"]
+  "workspaces": ["apps/*", "packages/*"],
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.41.0"
+  }
 }

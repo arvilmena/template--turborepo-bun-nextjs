@@ -8,10 +8,16 @@
     "check-types": "bun --bun tsc --noEmit"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@total-typescript/ts-reset": "^0.6.1"
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/bun": "^1.2.10",
+    "@types/pg": "^8.11.14",
+    "drizzle-kit": "^0.31.0"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.43.1",
+    "pg": "^8.15.6"
   }
 }
