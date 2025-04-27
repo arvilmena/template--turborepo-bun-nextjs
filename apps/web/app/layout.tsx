@@ -17,7 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} container mx-auto dark`}>
+        <div className="prose lg:prose-xl dark:prose-invert max-w-none">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
