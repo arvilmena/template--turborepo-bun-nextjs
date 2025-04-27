@@ -39,7 +39,6 @@
       },
       "devDependencies": {
         "@my/eslint-config": "*",
-        "@my/tailwind-config": "*",
         "@my/typescript-config": "*",
         "@next/eslint-plugin-next": "^15.3.0",
         "@tailwindcss/postcss": "^4.1.4",
@@ -65,7 +64,6 @@
       },
       "devDependencies": {
         "@my/eslint-config": "*",
-        "@my/tailwind-config": "*",
         "@my/typescript-config": "*",
         "@next/eslint-plugin-next": "^15.3.0",
         "@tailwindcss/postcss": "^4.1.4",
@@ -144,15 +142,6 @@
         "typescript": "^5",
       },
     },
-    "packages/tailwind-config": {
-      "name": "@my/tailwind-config",
-      "version": "0.0.0",
-      "devDependencies": {
-        "@my/typescript-config": "*",
-        "@tailwindcss/postcss": "^4.1.4",
-        "tailwindcss": "^4",
-      },
-    },
     "packages/typescript-config": {
       "name": "@my/typescript-config",
       "version": "0.0.0",
@@ -166,7 +155,6 @@
       },
       "devDependencies": {
         "@my/eslint-config": "*",
-        "@my/tailwind-config": "*",
         "@my/typescript-config": "*",
         "@tailwindcss/cli": "^4.1.4",
         "@tailwindcss/postcss": "^4.1.4",
@@ -347,8 +335,6 @@
     "@my/fs-service": ["@my/fs-service@workspace:packages/fs-service"],
 
     "@my/puppeteer-service": ["@my/puppeteer-service@workspace:packages/puppeteer-service"],
-
-    "@my/tailwind-config": ["@my/tailwind-config@workspace:packages/tailwind-config"],
 
     "@my/typescript-config": ["@my/typescript-config@workspace:packages/typescript-config"],
 
