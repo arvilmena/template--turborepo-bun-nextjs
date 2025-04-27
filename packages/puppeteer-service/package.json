@@ -1,0 +1,18 @@
+{
+  "name": "@my/puppeteer-service",
+  "version": "0.0.0",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^24.7.2",
+    "@my/fs-service": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@total-typescript/ts-reset": "^0.6.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

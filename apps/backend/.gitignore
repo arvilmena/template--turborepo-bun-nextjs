@@ -30,9 +30,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# vercel
-.vercel
-
 **/*.trace
 **/*.zip
 **/*.tar.gz
@@ -40,3 +37,6 @@ yarn-error.log*
 **/*.log
 package-lock.json
 **/*.bun
+
+# build output
+server
