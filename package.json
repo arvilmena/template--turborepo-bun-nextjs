@@ -1,18 +1,19 @@
 {
-  "name": "with-tailwind",
+  "name": "stonkerino",
   "private": true,
   "scripts": {
+    "check-types": "bun --bun turbo run check-types",
     "build": "bun --bun turbo run build",
     "dev": "bun --bun turbo run dev",
-    "lint": "bun --bun turbo run lint",
+    "lint": "bun --bun turbo run lint && biome check .",
     "test": "bun --bun turbo run test",
-    "check-types": "bun --bun turbo run check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "format-and-lint": "biome check .",
-    "format-and-lint:fix": "biome check . --write"
+    "lint:fix": "biome check . --write",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "husky": "^9.1.7",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "turbo": "^2.5.2"
