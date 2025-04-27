@@ -8,7 +8,8 @@
     "check-types": "bun --bun tsc --noEmit"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@total-typescript/ts-reset": "^0.6.1"
   },
   "peerDependencies": {
     "typescript": "^5"

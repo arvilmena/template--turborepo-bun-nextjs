@@ -10,7 +10,8 @@
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "@total-typescript/ts-reset": "^0.6.1"
   },
   "module": "src/index.js"
 }
