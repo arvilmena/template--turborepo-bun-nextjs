@@ -1,8 +1,7 @@
 {
   "name": "@my/db",
   "version": "0.0.0",
-  "module": "index.ts",
-  "type": "module",
+  "private": true,
   "scripts": {
     "test": "bun test",
     "check-types": "bun --bun tsc --noEmit"
@@ -17,6 +16,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@my/base": "*",
     "drizzle-orm": "^0.43.1",
     "pg": "^8.15.6"
   }
