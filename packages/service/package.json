@@ -1,6 +1,7 @@
 {
-  "name": "@my/fs-service",
+  "name": "@my/service",
   "version": "0.0.0",
+  "private": true,
   "exports": {
     "./*": "./src/*.ts"
   },
@@ -9,7 +10,10 @@
     "check-types": "bun --bun tsc --noEmit"
   },
   "dependencies": {
-    "zod": "^4.0.0-beta.20250424T163858"
+    "@my/db": "workspace:*",
+    "@my/error": "workspace:*",
+    "@my/redis-service": "workspace:*",
+    "p-limit": "^6.2.0"
   },
   "devDependencies": {
     "@types/bun": "latest",

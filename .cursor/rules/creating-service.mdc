@@ -1,0 +1,238 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+TITLE: Creating a service for an entity
+DESCRIPTION: When asked to generate a service for an entity, strictly follow this template.
+
+LANGUAGE: TypeScript
+CODE:
+```
+import {
+  type <Entity>DbFindOneType,
+  type <Entity>DbInsertWithoutCalculatedFieldsType,
+  type <Entity>DbUpdateWithoutCalculatedFieldsType,
+  type <Entity>Repository,
+  <entity>DbInsertWithoutCalculatedFieldsSchema,
+  <entity>DbUpdateWithoutCalculatedFieldsSchema,
+  <entity>Repository,
+} from "@my/db/repository/<entity>.repository";
+import {
+  DatabaseInsertionError,
+  FailedExpectationError,
+  NotFoundError,
+} from "@my/error/error";
+import {
+  type RedisService,
+  redisService,
+} from "@my/redis-service/redis.service";
+import pLimit from "p-limit";
+import type { ServiceArgType } from "./constants/serviceArg.types";
+
+export class <Entity>Service {
+  constructor(
+    private readonly redisService: RedisService,
+    private readonly <entity>Repository: <Entity>Repository,
+  ) {}
+
+  private async getRedisCache(id: number): Promise<<Entity>DbFindOneType> {
+    const cacheKey = "<Entity>Service:findById:" + id;
+    const cache = await this.redisService.getJson(cacheKey);
+    return cache as <Entity>DbFindOneType;
+  }
+
+  private async setRedisCache(id: number, data: <Entity>DbFindOneType) {
+    if (data === undefined) {
+      await this.redisService.del(`<Entity>Service:findById:${id}`);
+      return;
+    }
+    const cacheKey = `<Entity>Service:findById:${data.id}`;
+    await this.redisService.setJson(cacheKey, data);
+  }
+
+  async deleteById({
+    id,
+  }: {
+    id: number;
+  }): Promise<<Entity>DbFindOneType> {
+    // Step 1. First retrieve the record to delete
+    const existingRecord = await this.findById({ id });
+
+    if (!existingRecord) {
+      throw new NotFoundError(`Failed to find <Entity> with id: ${id} to delete.`);
+    }
+
+    // Step 2. Issue the delete
+    await this.<entity>Repository.deleteById(id);
+
+    // Step 3. Delete the record from the cache
+    await this.setRedisCache(id, undefined);
+
+    // Finally, return the deleted record
+    return existingRecord;
+  }
+
+  private async onChangeEvent({
+    record,
+  }: {
+    record: <Entity>DbFindOneType;
+  }) {
+    if (!record) return;
+    await this.setRedisCache(record.id, record);
+  }
+
+  async createMany({
+    data,
+  }: {
+    data: <Entity>DbInsertWithoutCalculatedFieldsType[];
+  }) {
+    // Step 1. Validate and calculate fields
+    const _limit1 = pLimit(5);
+    const _data = await Promise.all(
+      data.map(async (d) =>
+        _limit1(async () => {
+          const _withoutCalculatedFields =
+            <entity>DbInsertWithoutCalculatedFieldsSchema.parse(d);
+
+          return {
+            ..._withoutCalculatedFields,
+            // TODO: Calculate the calculated fields
+          };
+        }),
+      ),
+    );
+
+    // Step 2. Insert the data into the database
+    const recordIds = await this.<entity>Repository.insert(_data);
+
+    // Step 3. Retrieve the inserted records
+    const _limit2 = pLimit(5);
+    const records = await Promise.all(
+      recordIds.map(async (recordId) =>
+        _limit2(async () => {
+          const found = await this.<entity>Repository.findById({
+            id: recordId.id,
+          });
+
+          if (!found) {
+            throw new FailedExpectationError(
+              "<Entity> should already be inserted, but failed when tried to retrieve the normalised record.",
+            );
+          }
+
+          await this.onChangeEvent({ record: found });
+
+          return found;
+        }),
+      ),
+    );
+    return records;
+  }
+
+  async createOne({
+    data,
+  }: {
+    data: <Entity>DbInsertWithoutCalculatedFieldsType;
+  }) {
+    const [record] = await this.createMany({ data: [data] });
+    return record;
+  }
+
+  async findById({
+    id,
+    skipCache = false,
+  }: ServiceArgType & {
+    id: number;
+  }): Promise<<Entity>DbFindOneType> {
+    if (!skipCache) {
+      const cached = await this.getRedisCache(id);
+      if (cached) {
+        return cached;
+      }
+    }
+    const record = await this.<entity>Repository.findById({ id });
+    await this.setRedisCache(id, record);
+    return record;
+  }
+
+  async updateById({
+    id,
+    data,
+  }: {
+    id: number;
+    data: <Entity>DbUpdateWithoutCalculatedFieldsType;
+  }) {
+    // Step 1. Confirm that the requested record exists
+    const existingRecord = await this.findById({ id, skipCache: true });
+    if (!existingRecord) {
+      throw new NotFoundError(`Failed to find <Entity> with id: ${id} to update.`);
+    }
+
+    // Step 2. Validate and calculate fields
+    const _data = <entity>DbUpdateWithoutCalculatedFieldsSchema.parse(data);
+    const updateParams = { ..._data };
+
+    // Step 3. Issue the update
+    const updatedRecordId = await this.<entity>Repository.updateById({
+      id,
+      data: updateParams,
+    });
+    if (!updatedRecordId) {
+      throw new DatabaseInsertionError(`Failed to update <Entity> with id: ${id}`);
+    }
+
+    // Step 4. Retrieve the updated record
+    const updatedRecord = await this.<entity>Repository.findById({
+      id: updatedRecordId.id,
+    });
+    if (!updatedRecord) {
+      throw new FailedExpectationError(
+        "<Entity> should already be updated, but failed when tried to retrieve the updated record.",
+      );
+    }
+
+    // Step 5. Trigger the onChangeEvent
+    await this.onChangeEvent({ record: updatedRecord });
+
+    // Finally, return the updated record
+    return updatedRecord;
+  }
+
+  async getBy() {
+    // Step 1. Retrieve the collection, getting only the ids
+    const recordIds = await this.<entity>Repository.getBy();
+
+    // Step 2. For each id, retrieve the normalised record
+    const _limit = pLimit(5);
+    const records = await Promise.all(
+      recordIds.map(async (recordId) =>
+        _limit(async () => {
+          return await this.findById({ id: recordId.id });
+        }),
+      ),
+    );
+
+    // Step 3. Filter out the undefined records
+    const withoutUndefined = records.filter(Boolean);
+
+    // Step 4. Throw an error if the number of records is not the same as the number of ids
+    if (withoutUndefined.length !== recordIds.length) {
+      throw new FailedExpectationError(
+        "<Entity> should already be inserted, but failed when tried to retrieve the normalised record.",
+      );
+    }
+
+    // Step 5. Return the records
+    return withoutUndefined;
+  }
+}
+
+export const <entity>Service = new <Entity>Service(redisService, <entity>Repository);
+```
+
+Instructions for use:
+Replace <entity> with the entity variable name (e.g., stock).
+Replace <Entity> with the PascalCase entity name (e.g., Stock).
+Adjust calculated fields logic as needed.
+Use this template for all new entity service files unless otherwise specified.

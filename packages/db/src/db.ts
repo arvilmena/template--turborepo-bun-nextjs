@@ -5,3 +5,4 @@ import * as schema from "./schema";
 
 const client = new SQL(DB_CONFIG.DATABASE_URL);
 export const db = drizzle({ client, schema });
+export type DbType = typeof db;

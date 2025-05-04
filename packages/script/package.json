@@ -1,7 +1,8 @@
 {
-  "name": "@my/db",
+  "name": "@my/script",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "exports": {
     "./*": "./src/*.ts"
   },
@@ -11,20 +12,18 @@
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/bun": "^1.2.10",
-    "@types/pg": "^8.11.14",
-    "drizzle-kit": "^0.31.0"
+    "@types/bun": "latest",
+    "@my/eslint-config": "*",
+    "@my/typescript-config": "*"
   },
   "peerDependencies": {
-    "typescript": "^5",
-    "zod": "^3"
+    "typescript": "^5"
   },
   "dependencies": {
+    "pino": "^9.6.0",
+    "zod": "^4.0.0-beta.20250503T014749",
     "@my/base": "*",
-    "@my/typescript-config": "*",
-    "drizzle-orm": "^0.43.1",
-    "drizzle-zod": "^0.7.1",
-    "pg": "^8.15.6",
-    "zod": "^3.24.3"
+    "@my/service": "*",
+    "@my/typescript-config": "*"
   }
 }

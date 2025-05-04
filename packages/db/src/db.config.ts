@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const configSchema = z.interface({
+const configSchema = z.object({
   DATABASE_URL: z.string().min(2),
 });
 

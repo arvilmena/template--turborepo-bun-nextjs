@@ -5,11 +5,20 @@
   "exports": {
     "./*": "./src/*.ts"
   },
+  "scripts": {
+    "test": "bun test",
+    "check-types": "bun --bun tsc --noEmit"
+  },
   "devDependencies": {
+    "@my/typescript-config": "*",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "pino": "^9.6.0",
+    "zod": "^4.0.0-beta.20250503T014749"
   }
 }

@@ -10,7 +10,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint:fix": "biome check . --write",
     "prepare": "husky",
-    "db:push": "bunx dotenvx run -f .env -- bun --bun ./node_modules/drizzle-kit/bin.cjs --config ./packages/db/drizzle.config.ts push"
+    "db:push": "bunx dotenvx run -f .env -- bun --bun ./node_modules/drizzle-kit/bin.cjs --config ./packages/db/drizzle.config.ts push",
+    "test:stock": "bun run packages/script/src/test-stock-service.ts | pino-pretty"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

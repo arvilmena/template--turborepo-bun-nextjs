@@ -3,6 +3,7 @@ import { CRAWL_TYPE } from "@my/base/crawlType.constant";
 import { sql } from "drizzle-orm";
 import {
   bigint,
+  bigserial,
   index,
   integer,
   numeric,
@@ -19,7 +20,10 @@ const timeStampOpts = {
   mode: "string",
 } as const;
 
-export const marketCountryEnum = pgEnum("market_country", COUNTRY_ABBR);
+export const marketCountryEnum = pgEnum("market_country", [
+  COUNTRY_ABBR.PH,
+  COUNTRY_ABBR.US,
+]);
 
 const createdAt = timestamp("created_at", timeStampOpts)
   .default(sql`(now() AT TIME ZONE 'utc'::text)`)
@@ -29,6 +33,8 @@ const updatedAt = timestamp("updated_at", timeStampOpts)
   .default(sql`(now() AT TIME ZONE 'utc'::text)`)
   .notNull()
   .$onUpdate(() => sql`(now() AT TIME ZONE 'utc'::text)`);
+
+const deletedAt = timestamp("deleted_at", timeStampOpts);
 
 const marketCountry = marketCountryEnum("market_country").notNull();
 
@@ -41,8 +47,8 @@ export const users = pgTable("users", {
 export const stock = pgTable(
   "stock",
   {
-    id: integer("stock_id").primaryKey(),
-    currentSymbol: varchar("current_symbol", { length: 10 }).notNull(),
+    id: bigserial("stock_id", { mode: "number" }).primaryKey(),
+    currentSymbol: varchar("current_symbol", { length: 40 }).notNull(),
     currentSymbolSince: timestamp(
       "current_symbol_since",
       timeStampOpts,
@@ -57,6 +63,9 @@ export const stock = pgTable(
     swsLogoUrl: text("sws_logo_url"),
     pseFramesLogoUrl: text("pse_frames_logo_url"),
     listedAt: timestamp("listedAt", timeStampOpts),
+    createdAt,
+    updatedAt,
+    deletedAt,
   },
   (table) => [
     unique(`${"stock"}_symbol_market_country_unique`).on(
@@ -79,19 +88,21 @@ export const crawl = pgTable("crawl", {
   crawlCompletedAt: timestamp("crawl_completed_at", timeStampOpts),
   createdAt,
   updatedAt,
+  deletedAt,
 });
 
 export const crawlSwsStockListItem = pgTable("crawl_sws_stock_list_item", {
-  id: integer("id").primaryKey(),
+  id: bigserial("id", { mode: "number" }).primaryKey(),
   crawlId: integer("crawl_id").references(() => crawl.id),
   url: text("url").notNull(),
   crawlCompletedAt: timestamp("crawl_completed_at", timeStampOpts),
   createdAt,
   updatedAt,
+  deletedAt,
 });
 
 export const swsStockData = pgTable("sws_stock_data", {
-  id: integer("id").primaryKey(),
+  id: bigserial("id", { mode: "number" }).primaryKey(),
   crawlId: integer("crawl_id").references(() => crawl.id),
   swsId: integer("sws_id")
     .notNull()
@@ -169,4 +180,5 @@ export const swsStockData = pgTable("sws_stock_data", {
   crawlCompletedAt: timestamp("crawl_completed_at", timeStampOpts),
   createdAt,
   updatedAt,
+  deletedAt,
 });

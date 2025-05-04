@@ -1,0 +1,122 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+TITLE: Creating a repository for an entity
+DESCRIPTION: When asked to generate a repository for an entity, strictly follow this template:
+
+LANGUAGE: TypeScript
+CODE:
+```
+import logger from "@my/base/logger";
+import { eq } from "drizzle-orm";
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from "drizzle-zod";
+import type { z } from "zod";
+import { type DbType, db } from "../db";
+import { <entity> } from "../schema";
+
+// Insert schema and type
+export const <entity>DbInsertSchema = createInsertSchema(<entity>).pick({
+  // ...list of fields for insert
+});
+export type <Entity>DbInsertType = z.infer<typeof <entity>DbInsertSchema>;
+
+// Update schema and type
+export const <entity>DbUpdateSchema = createUpdateSchema(<entity>).pick({
+  // ...list of fields for update
+});
+export type <Entity>DbUpdateType = z.infer<typeof <entity>DbUpdateSchema>;
+
+// Select schema and type
+export const <entity>DbSelectSchema = createSelectSchema(<entity>);
+export type <Entity>FoundOneType = z.infer<typeof <entity>DbSelectSchema>;
+
+// Calculated fields to be used by the entity service layer
+export const <entity>DbInsertWithoutCalculatedFieldsSchema = <entity>DbInsertSchema;
+export type <Entity>DbInsertWithoutCalculatedFieldsType = z.infer<
+  typeof <entity>DbInsertWithoutCalculatedFieldsSchema
+>;
+export const <entity>DbUpdateWithoutCalculatedFieldsSchema = <entity>DbUpdateSchema;
+export type <Entity>DbUpdateWithoutCalculatedFieldsType = z.infer<
+  typeof <entity>DbUpdateWithoutCalculatedFieldsSchema
+>;
+
+export class <Entity>Repository {
+  constructor(private readonly db: DbType) {}
+
+  async insert(data: <Entity>DbInsertType[]) {
+    return await this.db.transaction(async (tx) => {
+      try {
+        return await tx.insert(<entity>).values(data).returning({
+          id: <entity>.id,
+        });
+      } catch (error) {
+        logger.error(error);
+        tx.rollback();
+        throw error;
+      }
+    });
+  }
+
+  async findById({ id }: { id: number }) {
+    return this.db.query.<entity>.findFirst({
+      where: eq(<entity>.id, id),
+    });
+  }
+
+  async updateById({ id, data }: { id: number; data: <Entity>DbUpdateType }) {
+    return await this.db.transaction(async (tx) => {
+      try {
+        const [v] = await tx
+          .update(<entity>)
+          .set(data)
+          .where(eq(<entity>.id, id))
+          .returning({
+            id: <entity>.id,
+          });
+        return v;
+      } catch (error) {
+        logger.error(error);
+        tx.rollback();
+        throw error;
+      }
+    });
+  }
+
+  async deleteById(id: number) {
+    return await this.db.transaction(async (tx) => {
+      try {
+        return await tx.delete(<entity>).where(eq(<entity>.id, id)).returning({
+          id: <entity>.id,
+        });
+      } catch (error) {
+        logger.error(error);
+        tx.rollback();
+        throw error;
+      }
+    });
+  }
+
+  async getBy() {
+    return await this.db.query.<entity>.findMany({ columns: { id: true } });
+  }
+}
+
+export type <Entity>DbFindOneType = Awaited<
+  ReturnType<<Entity>Repository["findById"]>
+>;
+
+export const <entity>Repository = new <Entity>Repository(db);
+```
+
+Instructions for use:
+Replace <entity> with the entity variable name (e.g., stock).
+Replace <Entity> with the PascalCase entity name (e.g., Stock).
+Adjust the fields in .pick({ ... }) for insert and update schemas as needed for the entity. Do not pick the `createdAt` and/or `updatedAt` if they exist as property of the entity. `createdAt` and `updatedAt` are automatically populated by the SQL database.
+The repository should always use transactions for create, update, and delete.
+Always export the repository instance at the end.

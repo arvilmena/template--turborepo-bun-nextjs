@@ -4,6 +4,10 @@
   "exports": {
     "./*": "./src/*.ts"
   },
+  "scripts": {
+    "test": "bun test",
+    "check-types": "bun --bun tsc --noEmit"
+  },
   "dependencies": {
     "puppeteer": "^24.7.2",
     "@my/fs-service": "workspace:*"

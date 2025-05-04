@@ -1,6 +1,7 @@
 {
-  "name": "@my/fs-service",
+  "name": "@my/redis-service",
   "version": "0.0.0",
+  "private": true,
   "exports": {
     "./*": "./src/*.ts"
   },
@@ -8,14 +9,15 @@
     "test": "bun test",
     "check-types": "bun --bun tsc --noEmit"
   },
-  "dependencies": {
-    "zod": "^4.0.0-beta.20250424T163858"
-  },
   "devDependencies": {
     "@types/bun": "latest",
     "@total-typescript/ts-reset": "^0.6.1"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@my/base": "workspace:*",
+    "redis": "^5.0.0"
   }
 }
